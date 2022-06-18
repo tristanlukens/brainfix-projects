@@ -1,0 +1,55 @@
+include "std.bfx"
+
+function num = rng(min, max) { let num = rand() % max + min; }
+function chr = getChar() { let chr; scans(chr); }
+
+function valid = validate(input)
+{
+	let valid;
+	if (input == "r" || input == "p" || input == "s") {
+		valid = true;
+		return;
+	}
+	valid = false;
+}
+
+function cpu = assignCpu()
+{
+	let randnum = rng(0, 2);
+	let cpu;
+	switch (randnum)
+	{
+		case 0: cpu = "r";
+		case 1: cpu = "p";
+		case 2: cpu = "s";
+	}
+}
+
+function res = evaluate(cpu, player)
+{
+	let res;
+	if (player == cpu)
+		let res = "tie!";
+	else if ((cpu == "r" && player == "p") ||
+						 (cpu == "p" && player == "s") ||
+						 (cpu == "s" && player == "r"))
+	{
+		let res = "player wins!";
+	} else
+		let res = "cpu wins!";
+}
+
+function main()
+{
+	println("Enter r, p or s.");
+
+	let cpu = assignCpu();
+	let player = getChar();
+	while (validate(player) == 0) {
+		println("Invalid input; try again");
+		player = getChar();
+	}
+
+	let outcome = evaluate(cpu, player);
+	println(outcome);
+}
