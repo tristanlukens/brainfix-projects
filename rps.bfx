@@ -3,15 +3,7 @@ include "std.bfx"
 function num = rng(min, max) { let num = rand() % max + min; }
 function chr = getChar() { let chr; scans(chr); }
 
-function valid = validate(input)
-{
-	let valid;
-	if (input == "r" || input == "p" || input == "s") {
-		valid = true;
-		return;
-	}
-	valid = false;
-}
+function valid = validate(input) { let valid = (input == "r" || input == "p" || input == "s"); }
 
 function cpu = assignCpu()
 {
@@ -31,8 +23,8 @@ function res = evaluate(cpu, player)
 	if (player == cpu)
 		let res = "tie!";
 	else if ((cpu == "r" && player == "p") ||
-						 (cpu == "p" && player == "s") ||
-						 (cpu == "s" && player == "r"))
+					 (cpu == "p" && player == "s") ||
+					 (cpu == "s" && player == "r"))
 	{
 		let res = "player wins!";
 	} else
